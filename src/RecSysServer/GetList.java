@@ -1,5 +1,8 @@
 package RecSysServer;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -60,10 +63,30 @@ public class GetList extends HttpServlet {
 		out.println("  <name>");
 		out.println(data[0]);
 		out.println("  </name>");
-		out.println("  <summary>");
-		out.println(data[1]);
-		out.println("  </summary>");
-		out.println("</item>");
+		
+		/*    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   */
+		        BufferedInputStream in = new BufferedInputStream(new FileInputStream("D:/apache-tomcat-7.0.50/webapps/RecSysServer/cat.jpg"));      
+		        ByteArrayOutputStream out2 = new ByteArrayOutputStream(1024);      
+		     
+		        System.out.println("Available bytes:" + in.available());      
+		     
+		        byte[] temp = new byte[1024];      
+		        int size = 0;      
+		        while ((size = in.read(temp)) != -1) {      
+		            out2.write(temp, 0, size);      
+		        }      
+		        in.close();      
+		     
+		        byte[] content = out2.toByteArray();      
+		        //System.out.println("Readed bytes count:" + content.length);      
+		/*    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   */
+		        out.println("  <summary>");
+		       /* for(int i = 0; i < content.length; i++){
+		        	out.println(content[i]);
+		        }*/
+				
+				out.println("  </summary>");
+				out.println("</item>");
 		out.flush();
 		out.close();
 	}
