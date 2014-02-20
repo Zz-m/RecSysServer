@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,12 +23,12 @@ import util.JsonHelper;
  * @author adj
  * 
  */
-public class GetList extends HttpServlet {
+public class GetItemList extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public GetList() {
+	public GetItemList() {
 		super();
 	}
 
@@ -55,17 +57,24 @@ public class GetList extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Item item = getItem();
-		JSONObject jobj = JsonHelper.toJSON(item);
-		String jString = jobj.toString();
+		List<Item> list = ItemList.getItemList();
+		StringBuilder jsonResponse = new StringBuilder();
+		Iterator<Item> it = list.iterator();
+		while(it.hasNext()) {
+			Item item = it.next();
+			jsonResponse.append(JsonHelper.toJSON(item).toString());
+			jsonResponse.append("&-&");
+		}
+		
 		response.setContentType("text/json;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		out.println(jString);
+		out.println(jsonResponse.toString());
 		out.flush();
 		out.close();
 	}
 
+	
 	private Item getItem() {
 		Item item = new Item();
 		item.setName(getName());

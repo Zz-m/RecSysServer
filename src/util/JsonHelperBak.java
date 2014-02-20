@@ -18,7 +18,7 @@ import org.json.JSONObject;
  * @author Alexia
  */
 
-public class JsonHelper {
+public class JsonHelperBak {
     
     /**
      * ½«Javabean×ª»»ÎªMap
@@ -125,7 +125,6 @@ public class JsonHelper {
 
                 }
             } catch (Exception e) {
-            	e.printStackTrace();
             }
 
         }
