@@ -3,7 +3,11 @@ package server;
 import java.io.Serializable;
 
 import util.JsonHelper;
-
+/**
+ * 
+ * @author adj
+ *
+ */
 public class Item {
 	private String id;
 	private String name;
