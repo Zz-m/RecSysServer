@@ -1,4 +1,4 @@
 RecSysServer
 ============
 
-Recommended System Server develop for fun いじょう。
+推荐系统服务端
